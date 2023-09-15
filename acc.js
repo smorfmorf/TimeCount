@@ -12,6 +12,7 @@ wrapper.forEach((el) => {
   console.log(el.scrollHeight);
   if (heightWrapper < el.scrollHeight) {
     heightWrapper = el.scrollHeight;
+    el.style.height = `${heightWrapper}px`;
     console.log("heightWrapper: ", heightWrapper);
   }
 });
