@@ -53,20 +53,17 @@
 // const deadline = (timerElement.dataset.deadline = "2023.09.15");
 // // Теперь дедлайн установлен в атрибуте "data-deadline" элемента с классом "timer"
 
+// const deadline = timerElement.getAttribute("data-timer-deadline");
+
 // timer(deadline);
 
 function timer(deadline) {
-  function updateTimer() {
-    const timerElements = document.querySelectorAll(".timer__count");
+  const timerElements = document.querySelectorAll(".timer__count");
 
+  function updateTimer() {
     const dateStop = new Date(deadline).getTime();
     const dateNow = Date.now();
     const timeRemaining = dateStop - dateNow;
-
-    if (timeRemaining <= 0) {
-      timerElements.forEach((element) => (element.textContent = "00"));
-      return;
-    }
 
     const minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
     const hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
@@ -94,30 +91,35 @@ function timer(deadline) {
     timerElements[0].textContent = days.toString();
     timerElements[1].textContent = hours.toString().padStart(2, "0");
     timerElements[2].textContent = minutes.toString().padStart(2, "0");
-    const timer__units = document.querySelectorAll(".timer__units");
 
+    const timer__units = document.querySelectorAll(".timer__units");
     timer__units[0].textContent = dayWord;
     timer__units[1].textContent = hourWord;
     timer__units[2].textContent = minuteWord;
+
+    return timeRemaining;
   }
 
-  // Запустить обновление таймера каждую секунду
-  setInterval(updateTimer, 1000);
-
   // Вызываем обновление таймера, чтобы начать отсчет
-  updateTimer();
+  const timeRemaining = updateTimer();
+
+  // Запустить обновление таймера каждую секунду
+  const id = setInterval(updateTimer, 1000);
+
+  if (timeRemaining <= 0) {
+    timerElements.forEach((element) => (element.textContent = "00"));
+    const hero__text = document.querySelector(".hero__text");
+    const hero__timer = document.querySelector(".hero__timer");
+    hero__text.remove();
+    hero__timer.remove();
+    clearInterval(id);
+  }
 }
 
-export const TimeCount = {
-  init: () => {
-    document.addEventListener("DOMContentLoaded", function () {
-      // Получаем значение дедлайна из атрибута "data-timer-deadline"
-      const timerElement = document.querySelector(".hero__timer");
-      const deadline = (timerElement.dataset.deadline = "2023.09.15");
-      // const deadline = timerElement.getAttribute("data-timer-deadline");
+// Получаем значение дедлайна из атрибута "data-timer-deadline"
+const timerElement = document.querySelector(".hero__timer");
+const deadline = (timerElement.dataset.deadline = "2023.09.16");
+// const deadline = timerElement.getAttribute("data-timer-deadline");
 
-      // Запускаем таймер
-      timer(deadline);
-    });
-  },
-};
+// Запускаем таймер
+timer(deadline);
