@@ -2,9 +2,6 @@ fetch("db.json")
     .then((data) => data.json())
     .then((res) => console.log(res));
 
-const select = document.querySelectorAll(".reservation__option");
-console.log("select: ", select[0]);
-
 async function fetchDB() {
     const data = await fetch("db.json");
     const res = await data.json();
@@ -13,6 +10,7 @@ async function fetchDB() {
 }
 
 const selectDate = document.querySelector("#reservation__date");
+const changeDate = document.querySelector(".tour__select");
 
 async function renderOptions() {
     const data = await fetchDB();
@@ -22,12 +20,21 @@ async function renderOptions() {
         const option = document.createElement("option");
         option.value = item.date;
         option.innerHTML = item.date;
+
         selectDate.append(option);
+
+        const option2 = document.createElement("option");
+        option2.value = item.date;
+        option2.innerHTML = item.date;
+
+        changeDate.append(option2);
     });
 }
 renderOptions();
 
 const selectPeople = document.querySelector("#reservation__people");
+const changePeople = document.querySelector("#tour__people");
+
 selectDate.addEventListener("click", async () => {
     const selectedDate = selectDate.value;
     const data = await fetchDB();
@@ -48,8 +55,28 @@ selectDate.addEventListener("click", async () => {
         }
     }
     PriceAndDate();
+});
 
-    // 24 ноября - 7 декабря, 4 человека
+changeDate.addEventListener("click", async () => {
+    const changedDate = changeDate.value;
+    const data = await fetchDB();
+
+    const dataItem = data.find((item) => item.date === changedDate);
+    console.log("dataItem: ", dataItem);
+    if (dataItem) {
+        changePeople.innerHTML = ""; // Очищаем селектор количества людей
+
+        for (
+            let i = dataItem["min-people"]; //мин кол-во людей
+            i <= dataItem["max-people"]; //макс кол-во людей
+            i++
+        ) {
+            const option = document.createElement("option");
+            option.value = i;
+            option.textContent = i;
+            changePeople.append(option);
+        }
+    }
 });
 
 selectPeople.addEventListener("click", PriceAndDate);
