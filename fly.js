@@ -15,7 +15,7 @@ document.body.append(fly);
 function calcPositionFly() {
     const maxScroll = docEl.scrollHeight - docEl.clientHeight;
 
-    //window.pageYOffset (текущее значение вертикальной прокрутки / на всю прокрутку) * 100 - формула
+    //window.pageYOffset (текущее значение вертикальной прокрутки в px / на всю прокрутку в px) * 100-получаем %
     const process = (window.pageYOffset / maxScroll) * 100;
 
     // вычисление вертикальной позиции самолета от % вертикальной прокрутки страницы

@@ -58,62 +58,62 @@
 // timer(deadline);
 
 function timer(deadline) {
-  const timerElements = document.querySelectorAll(".timer__count");
+    const timerElements = document.querySelectorAll(".timer__count");
 
-  function updateTimer() {
-    const dateStop = new Date(deadline).getTime();
-    const dateNow = Date.now();
-    const timeRemaining = dateStop - dateNow;
+    function updateTimer() {
+        const dateStop = new Date(deadline).getTime();
+        const dateNow = Date.now();
+        const timeRemaining = dateStop - dateNow;
 
-    const minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
-    const hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
-    const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+        const minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
+        const hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
+        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
 
-    // Функция для склонения слов в зависимости от числа
-    function pluralizeWord(number, one, two, five) {
-      if (number % 10 === 1 && number % 100 !== 11) {
-        return one;
-      } else if (
-        [2, 3, 4].includes(number % 10) &&
-        ![12, 13, 14].includes(number % 100)
-      ) {
-        return two;
-      } else {
-        return five;
-      }
+        // Функция для склонения слов в зависимости от числа
+        function pluralizeWord(number, one, two, five) {
+            if (number % 10 === 1 && number % 100 !== 11) {
+                return one;
+            } else if (
+                [2, 3, 4].includes(number % 10) &&
+                ![12, 13, 14].includes(number % 100)
+            ) {
+                return two;
+            } else {
+                return five;
+            }
+        }
+
+        const dayWord = pluralizeWord(days, "день", "дня", "дней");
+        const hourWord = pluralizeWord(hours, "час", "часа", "часов");
+        const minuteWord = pluralizeWord(minutes, "минута", "минуты", "минут");
+
+        // Обновляем числа и слова в каждом блоке
+        timerElements[0].textContent = days.toString();
+        timerElements[1].textContent = hours.toString().padStart(2, "0");
+        timerElements[2].textContent = minutes.toString().padStart(2, "0");
+
+        const timer__units = document.querySelectorAll(".timer__units");
+        timer__units[0].textContent = dayWord;
+        timer__units[1].textContent = hourWord;
+        timer__units[2].textContent = minuteWord;
+
+        return timeRemaining;
     }
 
-    const dayWord = pluralizeWord(days, "день", "дня", "дней");
-    const hourWord = pluralizeWord(hours, "час", "часа", "часов");
-    const minuteWord = pluralizeWord(minutes, "минута", "минуты", "минут");
+    // Вызываем обновление таймера, чтобы начать отсчет
+    const timeRemaining = updateTimer();
 
-    // Обновляем числа и слова в каждом блоке
-    timerElements[0].textContent = days.toString();
-    timerElements[1].textContent = hours.toString().padStart(2, "0");
-    timerElements[2].textContent = minutes.toString().padStart(2, "0");
+    // Запустить обновление таймера каждую секунду
+    const id = setInterval(updateTimer, 1000);
 
-    const timer__units = document.querySelectorAll(".timer__units");
-    timer__units[0].textContent = dayWord;
-    timer__units[1].textContent = hourWord;
-    timer__units[2].textContent = minuteWord;
-
-    return timeRemaining;
-  }
-
-  // Вызываем обновление таймера, чтобы начать отсчет
-  const timeRemaining = updateTimer();
-
-  // Запустить обновление таймера каждую секунду
-  const id = setInterval(updateTimer, 1000);
-
-  if (timeRemaining <= 0) {
-    timerElements.forEach((element) => (element.textContent = "00"));
-    const hero__text = document.querySelector(".hero__text");
-    const hero__timer = document.querySelector(".hero__timer");
-    hero__text.remove();
-    hero__timer.remove();
-    clearInterval(id);
-  }
+    if (timeRemaining <= 0) {
+        timerElements.forEach((element) => (element.textContent = "00"));
+        const hero__text = document.querySelector(".hero__text");
+        const hero__timer = document.querySelector(".hero__timer");
+        hero__text.remove();
+        hero__timer.remove();
+        clearInterval(id);
+    }
 }
 
 // Получаем значение дедлайна из атрибута "data-timer-deadline"
