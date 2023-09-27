@@ -5,3 +5,5 @@ import "./fetch.js";
 import "./burgerAnimation.js";
 import "./fly.js";
 import "./ajax.js";
+import "./style.js";
+import "./modal.js";

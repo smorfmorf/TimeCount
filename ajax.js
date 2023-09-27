@@ -54,7 +54,7 @@ form.addEventListener("submit", (event) => {
             }
 
             console.log("callback", data);
-            form.textContent = `заявка отправлена №${data.id}`;
+            // form.textContent = `заявка отправлена №${data.id}`;
         },
         header: {
             "Content-Type": "application/json",
