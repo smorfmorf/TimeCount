@@ -2,7 +2,7 @@ import loadStyle from "./style.js";
 const form = document.querySelector(".reservation__form");
 const price = document.querySelector(".reservation__price");
 
-form.addEventListener("click", async ({ target }) => {
+form.addEventListener("click", ({ target }) => {
     console.log("price", price.textContent);
     const obj = {
         data_obj: form.dates.value,

@@ -1,6 +1,6 @@
-fetch("db.json")
-    .then((data) => data.json())
-    .then((res) => console.log(res));
+// fetch("db.json")
+//     .then((data) => data.json())
+//     .then((res) => console.log(res));
 
 async function fetchDB() {
     const data = await fetch("db.json");
