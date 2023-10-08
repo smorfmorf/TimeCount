@@ -1,4 +1,4 @@
-import "./timer.js";
+import "./modules/timer.js";
 import "./modules/burger.js";
 import "./modules/acc.js";
 import "./modules/fetch.js";

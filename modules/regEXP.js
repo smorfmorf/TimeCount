@@ -10,3 +10,5 @@ input.addEventListener("input", () => {
 phone.addEventListener("input", () => {
     phone.value = phone.value.replace(/[^+0-9]/g, "");
 });
+
+console.log("phone");
