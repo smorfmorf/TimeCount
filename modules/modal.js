@@ -72,10 +72,10 @@ async function showModal(obj) {
             },
         });
 
-        form.dates.disabled = true;
-        form.people.disabled = true;
-        form.FIO.disabled = true;
-        form.phone.disabled = true;
+        // form.dates.disabled = true;
+        // form.people.disabled = true;
+        // form.FIO.disabled = true;
+        // form.phone.disabled = true;
         overlay.remove();
     });
 }
