@@ -38,29 +38,29 @@ input_name.addEventListener("input", () => {
     console.log(input_name.value);
 });
 
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    addPost(URL, {
-        method: "POST",
-        body: {
-            data: form.dates.value,
-            people: form.people.value,
-            name: input_name.value,
-            number: input_number.value,
-        },
-        callback(err, data) {
-            if (err) {
-                form.textContent = err.message;
-            }
+// form.addEventListener("submit", (event) => {
+//     event.preventDefault();
+//     addPost(URL, {
+//         method: "POST",
+//         body: {
+//             data: form.dates.value,
+//             people: form.people.value,
+//             name: input_name.value,
+//             number: input_number.value,
+//         },
+//         callback(err, data) {
+//             if (err) {
+//                 form.textContent = err.message;
+//             }
 
-            console.log("callback", data);
-            // form.textContent = `заявка отправлена №${data.id}`;
-        },
-        header: {
-            "Content-Type": "application/json",
-        },
-    });
-});
+//             console.log("callback", data);
+//             // form.textContent = `заявка отправлена №${data.id}`;
+//         },
+//         header: {
+//             "Content-Type": "application/json",
+//         },
+//     });
+// });
 
 const form2 = document.querySelector(".footer__form");
 const input_footer = document.querySelector(".footer__input");

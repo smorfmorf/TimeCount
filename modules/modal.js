@@ -2,6 +2,7 @@ import loadStyle from "./style.js";
 const form = document.querySelector(".reservation__form");
 const price = document.querySelector(".reservation__price");
 
+
 form.addEventListener("click", ({ target }) => {
     console.log("price", price.textContent);
     const obj = {
@@ -76,6 +77,7 @@ async function showModal(obj) {
         // form.people.disabled = true;
         // form.FIO.disabled = true;
         // form.phone.disabled = true;
+        // btn.disabled = true;
         overlay.remove();
     });
 }

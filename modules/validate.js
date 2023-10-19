@@ -1,3 +1,5 @@
+const btn = document.querySelector('.reservation__button')
+
 const phone = document.querySelector('#reservation__phone')
 
 const telMaks = new Inputmask('+7 (999)-999-99-99')
@@ -28,6 +30,24 @@ validate
         errorMessage:'неверный телефон'
     }
 ])
+.onSuccess(event => {
+    const target = event.target //form
+    axios.post('https://jsonplaceholder.typicode.com/posts',{
+        data: target.dates.value,
+        people: target.people.value,
+        name: target.FIO.value,
+        number: target.phone.value,
+    }).then(response => {
+        console.log(response)
+        target.reset()
+
+        target.dates.disabled = true;
+        target.people.disabled = true;
+        target.FIO.disabled = true;
+        target.phone.disabled = true;
+        btn.disabled = true;
+    })
+})
 
 
 new Swiper('.swiper', {
@@ -46,7 +66,8 @@ new Swiper('.swiper', {
       nextEl: '.album__right',
       prevEl: '.album__left',
     },
-
     mousewheel:true,
- 
-  });
+});
+
+
+
