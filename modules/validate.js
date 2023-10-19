@@ -43,7 +43,6 @@ validate
         number: target.phone.value,
     }).then(response => {
         console.log(response)
-        target.reset()
     })
 })
 
