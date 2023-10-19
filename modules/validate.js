@@ -1,10 +1,14 @@
-const btn = document.querySelector('.reservation__button')
+
+
 
 const phone = document.querySelector('#reservation__phone')
 
 const telMaks = new Inputmask('+7 (999)-999-99-99')
 
 telMaks.mask(phone)
+
+
+
 
 
 const validate = new JustValidate('.reservation__form')
@@ -40,14 +44,9 @@ validate
     }).then(response => {
         console.log(response)
         target.reset()
-
-        target.dates.disabled = true;
-        target.people.disabled = true;
-        target.FIO.disabled = true;
-        target.phone.disabled = true;
-        btn.disabled = true;
     })
 })
+
 
 
 new Swiper('.swiper', {

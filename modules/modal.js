@@ -1,10 +1,10 @@
 import loadStyle from "./style.js";
 const form = document.querySelector(".reservation__form");
 const price = document.querySelector(".reservation__price");
-
+const btn = document.querySelector('.reservation__button')
 
 form.addEventListener("click", ({ target }) => {
-    console.log("price", price.textContent);
+    // console.log("price", price.textContent);
     const obj = {
         data_obj: form.dates.value,
         people: form.people.value,
@@ -12,7 +12,7 @@ form.addEventListener("click", ({ target }) => {
         number: form.phone.value,
         price: price.textContent,
     };
-    console.log("obj: ", obj);
+    // console.log("obj: ", obj);
 
     if (target.classList.contains("reservation__button")) {
         showModal(obj);
@@ -56,6 +56,13 @@ async function showModal(obj) {
 
     changeBtn.addEventListener("click", () => {
         overlay.remove();
+
+        form.dates.disabled = false;
+        form.people.disabled = false;
+        form.FIO.disabled = false;
+        form.phone.disabled = false;
+        btn.disabled = false;
+
     });
 
     aceptBtn.addEventListener("click", () => {
@@ -73,11 +80,13 @@ async function showModal(obj) {
             },
         });
 
-        // form.dates.disabled = true;
-        // form.people.disabled = true;
-        // form.FIO.disabled = true;
-        // form.phone.disabled = true;
-        // btn.disabled = true;
         overlay.remove();
+
+        form.dates.disabled = true;
+        form.people.disabled = true;
+        form.FIO.disabled = true;
+        form.phone.disabled = true;
+        btn.disabled = true;
+     
     });
 }
