@@ -1,23 +1,23 @@
 import loadStyle from "./style.js";
 const form = document.querySelector(".reservation__form");
 const price = document.querySelector(".reservation__price");
-const btn = document.querySelector('.reservation__button')
+const btn = document.querySelector(".reservation__button");
 
-form.addEventListener("click", ({ target }) => {
-    // console.log("price", price.textContent);
-    const obj = {
-        data_obj: form.dates.value,
-        people: form.people.value,
-        name: form.FIO.value,
-        number: form.phone.value,
-        price: price.textContent,
-    };
-    // console.log("obj: ", obj);
+// form.addEventListener("click", ({ target }) => {
+//     // console.log("price", price.textContent);
+//     const obj = {
+//         data_obj: form.dates.value,
+//         people: form.people.value,
+//         name: form.FIO.value,
+//         number: form.phone.value,
+//         price: price.textContent,
+//     };
+//     // console.log("obj: ", obj);
 
-    if (target.classList.contains("reservation__button")) {
-        showModal(obj);
-    }
-});
+//     if (target.classList.contains("reservation__button")) {
+//         showModal(obj);
+//     }
+// });
 
 async function showModal(obj) {
     await loadStyle("./modal.css");
@@ -62,7 +62,6 @@ async function showModal(obj) {
         form.FIO.disabled = false;
         form.phone.disabled = false;
         btn.disabled = false;
-
     });
 
     aceptBtn.addEventListener("click", () => {
@@ -87,6 +86,7 @@ async function showModal(obj) {
         form.FIO.disabled = true;
         form.phone.disabled = true;
         btn.disabled = true;
-     
     });
 }
+
+export default showModal;
